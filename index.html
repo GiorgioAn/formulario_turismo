@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario de Participación Turística</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f7f7f7;
+      padding: 24px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8em;
+      color: #333;
+    }
+    h2 {
+      font-size: 1.3em;
+      color: #444;
+      margin-top: 32px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 16px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .checkbox-group label {
+      font-weight: normal;
+      display: block;
+      margin-top: 6px;
+    }
+    .hidden {
+      display: none;
+    }
+    .otro-especifique {
+      margin-top: 8px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1em;
+      border-radius: 6px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Formulario de Participación Turística Comunitaria</h1>
+<p><strong>¡Hola!</strong> Gracias por tomarte unos minutos para ayudarnos a construir una herramienta turística digital que centralice la información del destino y potencie tu negocio o servicio.</p>
+
+<form id="turismoForm">
+  <h2>1. Interés y percepción</h2>
+
+  <label>¿Le parece útil una solución digital que integre todos los servicios turísticos del destino?</label>
+  <select name="interes_digital" required>
+    <option disabled selected value="">-</option>
+    <option>Sí</option>
+    <option>No</option>
+    <option>No estoy seguro/a</option>
+  </select>
+
+  <label>¿Le gustaría que su establecimiento esté presente en esta app?</label>
+  <select name="quiere_aparecer" required>
+    <option disabled selected value="">-</option>
+    <option>Sí</option>
+    <option>Tal vez</option>
+    <option>No</option>
+  </select>
+
+  <label>¿Estaría dispuesto/a a pagar una cuota mensual por visibilidad en la plataforma?</label>
+  <select name="dispuesto_pagar" required>
+    <option disabled selected value="">-</option>
+    <option>Sí</option>
+    <option>Tal vez</option>
+    <option>No</option>
+  </select>
+
+  <label>¿Qué rango de cuota mensual le parece razonable?</label>
+  <select name="cuota_mensual" class="select-con-otro">
+    <option disabled selected value="">-</option>
+    <option>$15 – $20</option>
+    <option>$21 – $30</option>
+    <option>$31 – $40</option>
+    <option>Más de $40</option>
+    <option value="otro">Otro</option>
+  </select>
+  <div class="otro-especifique hidden">
+    <label>Especifique otro monto</label>
+    <textarea name="cuota_otro" rows="2"></textarea>
+  </div>
+
+  <h2>2. Funcionalidades deseadas</h2>
+
+  <label>Seleccione lo que le gustaría que aparezca en la app:</label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="funcionalidades" value="Mapa"> Mapa interactivo</label>
+    <label><input type="checkbox" name="funcionalidades" value="Fotos"> Galería de fotos</label>
+    <label><input type="checkbox" name="funcionalidades" value="Contacto"> WhatsApp / redes</label>
+    <label><input type="checkbox" name="funcionalidades" value="Opiniones"> Opiniones y reseñas</label>
+    <label><input type="checkbox" name="funcionalidades" value="Horarios"> Horarios</label>
+    <label><input type="checkbox" name="funcionalidades" value="Servicios"> Servicios ofrecidos</label>
+    <label><input type="checkbox" name="funcionalidades" value="Reservas"> Reservas online</label>
+    <label><input type="checkbox" name="funcionalidades" value="Promociones"> Promociones o descuentos</label>
+    <label><input type="checkbox" name="funcionalidades" value="Idiomas"> Traducción en varios idiomas</label>
+    <label><input type="checkbox" name="funcionalidades" value="Agenda"> Agenda de eventos locales</label>
+    <label><input type="checkbox" name="funcionalidades" value="Otro" class="check-otro"> Otro</label>
+  </div>
+  <div class="otro-especifique hidden">
+    <label>Especifique otra funcionalidad</label>
+    <textarea name="func_otro" rows="2"></textarea>
+  </div>
+
+  <h2>3. Información del establecimiento</h2>
+
+  <label>Nombre del establecimiento</label>
+  <input name="nombre_establecimiento" type="text" required>
+
+  <label>Dirección física o aproximada</label>
+  <input name="direccion" type="text">
+
+  <label>Tiempo de funcionamiento</label>
+  <input name="tiempo_funcionamiento" type="text" placeholder="Ej: 5 años o desde 2018">
+
+  <label>Días y horarios de atención</label>
+  <input name="horarios" type="text">
+
+  <label>Capacidad (clientes, camas, mesas, etc.)</label>
+  <input name="capacidad" type="text">
+
+  <label>Número aproximado de empleados</label>
+  <input name="empleados" type="number" min="0">
+
+  <h2>4. Clasificación del negocio</h2>
+
+  <label>Categoría principal</label>
+  <select name="categoria" class="select-con-otro">
+    <option disabled selected value="">-</option>
+    <option>Restaurante</option>
+    <option>Hospedaje</option>
+    <option>Tienda/Souvenir</option>
+    <option>Museo</option>
+    <option>Supermercado</option>
+    <option>Centro de salud</option>
+    <option>Transporte</option>
+    <option value="otro">Otro</option>
+  </select>
+  <div class="otro-especifique hidden">
+    <label>Especifique otra categoría</label>
+    <textarea name="categoria_otro" rows="2"></textarea>
+  </div>
+
+  <label>Subcategoría o tipo específico</label>
+  <input name="subcategoria" type="text" placeholder="Ej: Posada rural, comida típica, etc.">
+
+  <h2>5. Datos de contacto</h2>
+
+  <label>Nombre del gerente o responsable</label>
+  <input name="gerente" type="text">
+
+  <label>Teléfono (WhatsApp preferido)</label>
+  <input name="telefono" type="tel">
+
+  <label>Correo electrónico</label>
+  <input name="correo" type="email">
+
+  <label>Redes sociales o página web</label>
+  <input name="redes" type="text">
+
+  <h2>6. Comentarios y sugerencias</h2>
+
+  <label>¿Desea agregar alguna observación, idea o sugerencia?</label>
+  <textarea name="sugerencias" rows="4"></textarea>
+
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec";
+
+  function handleSelectOtro(select) {
+    const container = select.nextElementSibling;
+    if (select.value === "otro") {
+      container.classList.remove("hidden");
+    } else {
+      container.classList.add("hidden");
+      const textarea = container.querySelector("textarea");
+      if (textarea) textarea.value = "";
+    }
+  }
+
+  function handleCheckboxOtro(checkbox) {
+    const container = checkbox.closest(".checkbox-group").nextElementSibling;
+    if (checkbox.checked) {
+      container.classList.remove("hidden");
+    } else {
+      container.classList.add("hidden");
+      const textarea = container.querySelector("textarea");
+      if (textarea) textarea.value = "";
+    }
+  }
+
+  document.querySelectorAll(".select-con-otro").forEach(select => {
+    select.addEventListener("change", () => handleSelectOtro(select));
+  });
+
+  document.querySelectorAll(".check-otro").forEach(checkbox => {
+    checkbox.addEventListener("change", () => handleCheckboxOtro(checkbox));
+  });
+
+  document.getElementById("turismoForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
+
+    for (const [key, value] of formData.entries()) {
+      if (data[key]) {
+        if (Array.isArray(data[key])) {
+          data[key].push(value);
+        } else {
+          data[key] = [data[key], value];
+        }
+      } else {
+        data[key] = value;
+      }
+    }
+
+    if (Array.isArray(data.funcionalidades)) {
+      data.funcionalidades = data.funcionalidades.join(", ");
+    }
+
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    });
+
+    if (response.ok) {
+      alert("✅ Respuesta enviada con éxito");
+      this.reset();
+    } else {
+      alert("❌ Hubo un error al enviar. Intenta nuevamente.");
+    }
+  });
+</script>
+
+</body>
+</html>
