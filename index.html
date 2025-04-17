@@ -1,190 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario Turístico</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css">
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      background: #fafafa;
-    }
-
-    h1, h2 {
-      color: #333;
-    }
-
-    p.intro {
-      font-size: 1rem;
-      margin-bottom: 20px;
-    }
-
-    .grid-options, .social-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .grid-options label, .social-options label {
-      flex: 1 1 30%;
-      background: #f0f0f0;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-    }
-
-    .day-selector {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .day-selector label {
-      flex: 1 1 13%;
-      text-align: center;
-    }
-
-    input[type="number"],
-    input[type="time"],
-    select {
-      width: 100%;
-      padding: 6px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      border: none;
-      background: #333;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .grid-options label,
-      .social-options label {
-        flex: 1 1 100%;
-      }
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
 </head>
-<body>
+<body class="bg-gray-100 p-4">
+  <form id="formulario" class="max-w-2xl mx-auto bg-white p-6 rounded shadow space-y-4">
+    <h1 class="text-2xl font-bold">Formulario Turístico</h1>
+    <p><strong>¡Hola!</strong> Gracias por tomarte unos minutos para ayudarnos a construir una herramienta turística digital que centralice la información del destino y potencie tu negocio o servicio.</p>
 
-  <h1>Formulario de Registro</h1>
-  <p class="intro"><strong>¡Hola!</strong> Gracias por tomarte unos minutos para ayudarnos a construir una herramienta turística digital que centralice la información del destino y potencie tu negocio o servicio.</p>
-
-  <form id="formulario">
-
-    <!-- Pregunta 2 -->
-    <h2>¿Qué tipo de lugar es?</h2>
-    <div class="grid-options">
-      <label><input type="checkbox" name="tipo" value="Ciber"> Ciber</label>
-      <label><input type="checkbox" name="tipo" value="Coworking"> Coworking</label>
-      <label><input type="checkbox" name="tipo" value="Bar"> Bar</label>
-      <label><input type="checkbox" name="tipo" value="Café"> Café</label>
+    <!-- Pregunta 2: Clasificación -->
+    <div>
+      <label for="clasificacion" class="block font-semibold mb-2">Clasificación:</label>
+      <div class="flex flex-wrap gap-2">
+        <label><input type="checkbox" name="clasificacion" value="ciber"> Ciber</label>
+        <label><input type="checkbox" name="clasificacion" value="coworking"> Coworking</label>
+        <label><input type="checkbox" name="clasificacion" value="bar"> Bar</label>
+        <label><input type="checkbox" name="clasificacion" value="cafe"> Café</label>
+      </div>
     </div>
 
-    <!-- Días y horarios -->
-    <h2>Días y horarios de atención</h2>
-    <div class="day-selector">
-      <label><input type="checkbox" name="dias" value="D"> D</label>
-      <label><input type="checkbox" name="dias" value="L"> L</label>
-      <label><input type="checkbox" name="dias" value="M"> M</label>
-      <label><input type="checkbox" name="dias" value="X"> X</label>
-      <label><input type="checkbox" name="dias" value="J"> J</label>
-      <label><input type="checkbox" name="dias" value="V"> V</label>
-      <label><input type="checkbox" name="dias" value="S"> S</label>
+    <!-- Horarios y Días -->
+    <div>
+      <label class="block font-semibold mb-2">Días disponibles:</label>
+      <div class="flex flex-wrap gap-2">
+        <label><input type="checkbox" name="dias[]" value="D"> D</label>
+        <label><input type="checkbox" name="dias[]" value="L"> L</label>
+        <label><input type="checkbox" name="dias[]" value="M"> M</label>
+        <label><input type="checkbox" name="dias[]" value="X"> X</label>
+        <label><input type="checkbox" name="dias[]" value="J"> J</label>
+        <label><input type="checkbox" name="dias[]" value="V"> V</label>
+        <label><input type="checkbox" name="dias[]" value="S"> S</label>
+      </div>
+      <label class="block mt-2">Hora:</label>
+      <select name="hora">
+        <option value="">Selecciona una hora</option>
+        <option value="am">a.m.</option>
+        <option value="pm">p.m.</option>
+      </select>
     </div>
 
-    <label>Horario A.M.
-      <input type="time" name="hora_am">
-    </label>
-    <label>Horario P.M.
-      <input type="time" name="hora_pm">
-    </label>
-
-    <!-- Capacidad y empleados -->
-    <h2>Capacidad del lugar</h2>
-    <input type="number" name="capacidad" placeholder="Número de personas" />
-
-    <h2>Empleados</h2>
-    <input type="number" name="empleados" placeholder="Número de empleados" />
-
-    <!-- Clasificación -->
-    <h2>Clasificación</h2>
-    <div class="grid-options">
-      <label><input type="checkbox" name="clasificacion" value="Ciber"> Ciber</label>
-      <label><input type="checkbox" name="clasificacion" value="Coworking"> Coworking</label>
-      <label><input type="checkbox" name="clasificacion" value="Bar"> Bar</label>
-      <label><input type="checkbox" name="clasificacion" value="Café"> Café</label>
+    <!-- Capacidad -->
+    <div>
+      <label class="block font-semibold">Capacidad:</label>
+      <input type="number" name="capacidad" class="border rounded w-full">
     </div>
 
-    <!-- Redes sociales -->
-    <h2>Redes sociales / plataformas</h2>
-    <div class="social-options">
-      <label><input type="checkbox" name="redes" value="Reservas"> Booking / Airbnb / Tripadvisor</label>
-      <label><input type="checkbox" name="redes" value="PedidosYa"> Pedidos Ya</label>
-      <label><input type="checkbox" name="redes" value="Web"> Página Web</label>
-      <label><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
-      <label><input type="checkbox" name="redes" value="Instagram"> Instagram</label>
-      <label><input type="checkbox" name="redes" value="WhatsApp"> WhatsApp</label>
-      <label><input type="checkbox" name="redes" value="X"> X (antes Twitter)</label>
-      <label><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
-      <label><input type="checkbox" name="redes" value="Otros"> Otros</label>
+    <!-- Empleados -->
+    <div>
+      <label class="block font-semibold">Cantidad de empleados:</label>
+      <input type="number" name="empleados" class="border rounded w-full">
     </div>
 
-    <!-- Coordenadas -->
-    <h2>Dirección física</h2>
-    <p>Coordenadas GPS: <span id="gps-coords">Obteniendo ubicación...</span></p>
-    <input type="hidden" name="latitud" id="lat">
-    <input type="hidden" name="longitud" id="lon">
+    <!-- Redes Sociales -->
+    <div>
+      <label class="block font-semibold mb-2">Redes Sociales:</label>
+      <div class="flex flex-wrap gap-2">
+        <label><input type="checkbox" name="redes[]" value="plataformas"> Booking / Airbnb / TripAdvisor</label>
+        <label><input type="checkbox" name="redes[]" value="pedidosya"> PedidosYa</label>
+        <label><input type="checkbox" name="redes[]" value="web"> Página Web</label>
+        <label><input type="checkbox" name="redes[]" value="facebook"> Facebook</label>
+        <label><input type="checkbox" name="redes[]" value="instagram"> Instagram</label>
+        <label><input type="checkbox" name="redes[]" value="whatsapp"> WhatsApp</label>
+        <label><input type="checkbox" name="redes[]" value="x"> X</label>
+        <label><input type="checkbox" name="redes[]" value="tiktok"> TikTok</label>
+        <label><input type="checkbox" name="redes[]" value="otros"> Otros</label>
+      </div>
+    </div>
 
-    <button type="submit">Enviar</button>
+    <!-- Dirección física con coordenadas -->
+    <div>
+      <label class="block font-semibold">Dirección física:</label>
+      <input type="text" name="direccion" id="direccion" class="border rounded w-full" readonly>
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enviar</button>
   </form>
 
-  <!-- Librerías -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-  
-  <!-- Geolocalización -->
-  <script>
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = position.coords.latitude.toFixed(6);
-        const lon = position.coords.longitude.toFixed(6);
-        document.getElementById("gps-coords").textContent = `${lat}, ${lon}`;
-        document.getElementById("lat").value = lat;
-        document.getElementById("lon").value = lon;
-      }, (error) => {
-        document.getElementById("gps-coords").textContent = "No se pudo obtener la ubicación.";
-      });
-    } else {
-      document.getElementById("gps-coords").textContent = "Tu navegador no soporta geolocalización.";
-    }
-  </script>
-
-  <!-- Script envío a Google Sheets -->
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec";
     const form = document.getElementById("formulario");
 
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-          Swal.fire("¡Gracias!", "Tus datos fueron enviados correctamente.", "success");
-          form.reset();
-        })
-        .catch(error => {
-          Swal.fire("Error", "Ocurrió un error al enviar tus datos.", "error");
+    // GEOLOCALIZACION
+    function actualizarUbicacion() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+          const { latitude, longitude } = pos.coords;
+          document.getElementById("direccion").value = `${latitude}, ${longitude}`;
+        }, err => {
+          console.error("Error obteniendo ubicación", err);
         });
+      } else {
+        console.warn("El navegador no soporta geolocalización.");
+      }
+    }
+    actualizarUbicacion();
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      // Combinar redes sociales
+      const redes = [...form.querySelectorAll('input[name="redes[]"]:checked')].map(i => i.value).join(', ');
+      formData.set("redes", redes);
+
+      // Combinar días seleccionados
+      const dias = [...form.querySelectorAll('input[name="dias[]"]:checked')].map(i => i.value).join(', ');
+      formData.set("dias", dias);
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+      })
+      .then(() => {
+        swal("¡Enviado!", "Tu información ha sido registrada con éxito.", "success");
+        form.reset();
+        actualizarUbicacion();
+      })
+      .catch((error) => {
+        console.error("Error al enviar el formulario:", error);
+        swal("Oops", "Ocurrió un error. Intenta de nuevo más tarde.", "error");
+      });
     });
   </script>
-
 </body>
 </html>
