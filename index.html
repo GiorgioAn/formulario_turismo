@@ -1,131 +1,734 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario Turístico</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
-</head>
-<body class="bg-gray-100 p-4">
-  <form id="formulario" class="max-w-2xl mx-auto bg-white p-6 rounded shadow space-y-4">
-    <h1 class="text-2xl font-bold">Formulario Turístico</h1>
-    <p><strong>¡Hola!</strong> Gracias por tomarte unos minutos para ayudarnos a construir una herramienta turística digital que centralice la información del destino y potencie tu negocio o servicio.</p>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Participación Turística</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --azul-marino: #002366;
+      --dorado: #D4AF37;
+      --rojo: #C8102E;
+      --blanco: #FFFFFF;
+      --gris-claro: #F5F5F5;
+      --gris-medio: #E0E0E0;
+      --gris-oscuro: #333333;
+      --sombra: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-    <!-- Pregunta 2: Clasificación -->
-    <div>
-      <label for="clasificacion" class="block font-semibold mb-2">Clasificación:</label>
-      <div class="flex flex-wrap gap-2">
-        <label><input type="checkbox" name="clasificacion" value="ciber"> Ciber</label>
-        <label><input type="checkbox" name="clasificacion" value="coworking"> Coworking</label>
-        <label><input type="checkbox" name="clasificacion" value="bar"> Bar</label>
-        <label><input type="checkbox" name="clasificacion" value="cafe"> Café</label>
-      </div>
-    </div>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Horarios y Días -->
-    <div>
-      <label class="block font-semibold mb-2">Días disponibles:</label>
-      <div class="flex flex-wrap gap-2">
-        <label><input type="checkbox" name="dias[]" value="D"> D</label>
-        <label><input type="checkbox" name="dias[]" value="L"> L</label>
-        <label><input type="checkbox" name="dias[]" value="M"> M</label>
-        <label><input type="checkbox" name="dias[]" value="X"> X</label>
-        <label><input type="checkbox" name="dias[]" value="J"> J</label>
-        <label><input type="checkbox" name="dias[]" value="V"> V</label>
-        <label><input type="checkbox" name="dias[]" value="S"> S</label>
-      </div>
-      <label class="block mt-2">Hora:</label>
-      <select name="hora">
-        <option value="">Selecciona una hora</option>
-        <option value="am">a.m.</option>
-        <option value="pm">p.m.</option>
-      </select>
-    </div>
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: var(--gris-claro);
+      color: var(--gris-oscuro);
+      line-height: 1.6;
+    }
 
-    <!-- Capacidad -->
-    <div>
-      <label class="block font-semibold">Capacidad:</label>
-      <input type="number" name="capacidad" class="border rounded w-full">
-    </div>
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-    <!-- Empleados -->
-    <div>
-      <label class="block font-semibold">Cantidad de empleados:</label>
-      <input type="number" name="empleados" class="border rounded w-full">
-    </div>
+    .card {
+      background-color: var(--blanco);
+      border-radius: 10px;
+      box-shadow: var(--sombra);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
 
-    <!-- Redes Sociales -->
-    <div>
-      <label class="block font-semibold mb-2">Redes Sociales:</label>
-      <div class="flex flex-wrap gap-2">
-        <label><input type="checkbox" name="redes[]" value="plataformas"> Booking / Airbnb / TripAdvisor</label>
-        <label><input type="checkbox" name="redes[]" value="pedidosya"> PedidosYa</label>
-        <label><input type="checkbox" name="redes[]" value="web"> Página Web</label>
-        <label><input type="checkbox" name="redes[]" value="facebook"> Facebook</label>
-        <label><input type="checkbox" name="redes[]" value="instagram"> Instagram</label>
-        <label><input type="checkbox" name="redes[]" value="whatsapp"> WhatsApp</label>
-        <label><input type="checkbox" name="redes[]" value="x"> X</label>
-        <label><input type="checkbox" name="redes[]" value="tiktok"> TikTok</label>
-        <label><input type="checkbox" name="redes[]" value="otros"> Otros</label>
-      </div>
-    </div>
+    .header {
+      background-color: var(--azul-marino);
+      color: var(--blanco);
+      padding: 15px 0;
+      position: relative;
+      margin-bottom: 30px;
+    }
 
-    <!-- Dirección física con coordenadas -->
-    <div>
-      <label class="block font-semibold">Dirección física:</label>
-      <input type="text" name="direccion" id="direccion" class="border rounded w-full" readonly>
-    </div>
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enviar</button>
-  </form>
+    h1 {
+      color: var(--azul-marino);
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--dorado);
+      position: relative;
+    }
 
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec";
-    const form = document.getElementById("formulario");
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background-color: var(--rojo);
+    }
 
-    // GEOLOCALIZACION
-    function actualizarUbicacion() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-          const { latitude, longitude } = pos.coords;
-          document.getElementById("direccion").value = `${latitude}, ${longitude}`;
-        }, err => {
-          console.error("Error obteniendo ubicación", err);
-        });
-      } else {
-        console.warn("El navegador no soporta geolocalización.");
+    h2 {
+      color: var(--azul-marino);
+      font-size: 1.5rem;
+      margin: 25px 0 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gris-medio);
+    }
+
+    h2 i {
+      margin-right: 10px;
+      color: var(--dorado);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 8px;
+      font-weight: 600;
+      color: var(--azul-marino);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--gris-medio);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group, .radio-group {
+      margin: 15px 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .checkbox-inline, .radio-inline {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .checkbox-inline input, .radio-inline input {
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--azul-marino);
+      color: var(--blanco);
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: var(--sombra);
+    }
+
+    .btn:hover {
+      background-color: #001a4d;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary {
+      background-color: var(--azul-marino);
+    }
+
+    .btn-danger {
+      background-color: var(--rojo);
+    }
+
+    .btn-gold {
+      background-color: var(--dorado);
+      color: var(--azul-marino);
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    #loginPopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 35, 102, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #loginPopup form {
+      background: var(--blanco);
+      padding: 2.5rem;
+      border-radius: 10px;
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    #loginPopup h3 {
+      color: var(--azul-marino);
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header img {
+      max-width: 120px;
+      margin-bottom: 15px;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--gris-oscuro);
+      font-size: 0.9rem;
+    }
+
+    .time-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .time-group input {
+      flex: 1;
+    }
+
+    .time-group .ampm {
+      width: 70px;
+      padding: 12px;
+      background: var(--gris-claro);
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--dorado), transparent);
+      margin: 30px 0;
+    }
+
+    /* Estilos para los días de atención */
+    .dias-atencion {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .dia-option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background: var(--gris-claro);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dia-option:hover {
+      background: var(--dorado);
+      color: var(--blanco);
+    }
+
+    .dia-option.selected {
+      background: var(--azul-marino);
+      color: var(--blanco);
+    }
+
+    .dia-option input {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .checkbox-group {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .dias-atencion {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .dia-option:nth-child(7) {
+        grid-column: 2 / span 1;
       }
     }
-    actualizarUbicacion();
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      .checkbox-group {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .time-group {
+        flex-wrap: wrap;
+      }
+      
+      .time-group input {
+        min-width: 100%;
+      }
+      
+      .time-group .ampm {
+        width: 45%;
+      }
+    }
 
-      const formData = new FormData(form);
+    @media (max-width: 480px) {
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+      
+      .dias-atencion {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .dia-option:nth-child(7) {
+        grid-column: auto;
+      }
+    }
 
-      // Combinar redes sociales
-      const redes = [...form.querySelectorAll('input[name="redes[]"]:checked')].map(i => i.value).join(', ');
-      formData.set("redes", redes);
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      // Combinar días seleccionados
-      const dias = [...form.querySelectorAll('input[name="dias[]"]:checked')].map(i => i.value).join(', ');
-      formData.set("dias", dias);
+    .card {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: formData,
-      })
-      .then(() => {
-        swal("¡Enviado!", "Tu información ha sido registrada con éxito.", "success");
-        form.reset();
-        actualizarUbicacion();
-      })
-      .catch((error) => {
-        console.error("Error al enviar el formulario:", error);
-        swal("Oops", "Ocurrió un error. Intenta de nuevo más tarde.", "error");
-      });
+    /* Mejoras visuales para checkboxes y radios */
+    input[type="checkbox"], input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--dorado);
+    }
+  </style>
+</head>
+<body>
+
+<div id="loginPopup">
+  <form onsubmit="return verificarAcceso(event)">
+    <div class="form-header">
+      <h3><i class="fas fa-lock"></i> Acceso restringido</h3>
+    </div>
+    <div class="form-group">
+      <label for="usuario">Usuario:</label>
+      <input type="text" id="usuario" required>
+    </div>
+    <div class="form-group">
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena" required>
+    </div>
+    <button type="submit" class="btn btn-gold btn-block">
+      <i class="fas fa-sign-in-alt"></i> Ingresar
+    </button>
+  </form>
+</div>
+
+<div class="header hidden" id="headerSesion">
+  <div class="header-content">
+    <span>Formulario de Participación Turística</span>
+    <button class="btn btn-danger" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+    </button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>
+      <i class="fas fa-map-marked-alt"></i> Formulario de Participación Turística Comunitaria
+    </h1>
+
+    <form id="formulario">
+      <h2><i class="fas fa-star"></i> 1. Interés y percepción</h2>
+
+      <div class="form-group">
+        <label>¿Le parece útil una solución digital que integre todos los servicios turísticos del destino?</label>
+        <select name="interes_digital" required>
+          <option value="">Seleccione una opción</option>
+          <option>Sí</option>
+          <option>No</option>
+          <option>No estoy seguro/a</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Le gustaría que su establecimiento esté presente en esta app?</label>
+        <select name="quiere_aparecer" required>
+          <option value="">Seleccione una opción</option>
+          <option>Sí</option>
+          <option>Tal vez</option>
+          <option>No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Estaría dispuesto/a a pagar una cuota mensual por visibilidad en la plataforma?</label>
+        <select name="dispuesto_pagar" required>
+          <option value="">Seleccione una opción</option>
+          <option>Sí</option>
+          <option>Tal vez</option>
+          <option>No</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>¿Qué rango de cuota mensual le parece razonable?</label>
+        <select name="cuota_mensual" class="select-con-otro">
+          <option value="">Seleccione una opción</option>
+          <option>$15 – $20</option>
+          <option>$21 – $30</option>
+          <option>$31 – $40</option>
+          <option>Más de $40</option>
+          <option value="otro">Otro</option>
+        </select>
+        <div class="otro-especifique hidden">
+          <label>Especifique otro monto</label>
+          <textarea name="cuota_otro" rows="2" placeholder="Por favor, especifique el monto"></textarea>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-cogs"></i> 2. Funcionalidades deseadas</h2>
+      <div class="form-group">
+        <label>Seleccione lo que le gustaría que aparezca en la app:</label>
+        <div class="checkbox-group">
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Mapa"> Mapa</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Fotos"> Fotos</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Contacto"> Contacto</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Opiniones"> Opiniones</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Horarios"> Horarios</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Servicios"> Servicios</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Reservas"> Reservas</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Promociones"> Promociones</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Idiomas"> Idiomas</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Agenda"> Agenda</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Otro" class="check-otro"> Otro</label>
+        </div>
+        <div class="otro-especifique hidden">
+          <label>Especifique otra funcionalidad</label>
+          <textarea name="func_otro" rows="2" placeholder="Describa la funcionalidad que desearía"></textarea>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-store"></i> 3. Información del establecimiento</h2>
+
+      <div class="form-group">
+        <label>Nombre del establecimiento</label>
+        <input type="text" name="nombre_establecimiento" required placeholder="Ej: Restaurante La Casa del Mar">
+      </div>
+
+      <div class="form-group">
+        <label>Dirección física o aproximada</label>
+        <input type="text" name="direccion" required placeholder="Ej: Calle Principal #123, Ciudad">
+        <input type="hidden" name="coordenadas" id="coordenadas">
+      </div>
+
+      <div class="form-group">
+        <label>Días de atención</label>
+        <div class="dias-atencion">
+          <label class="dia-option" data-dia="D"><input type="checkbox" name="dias[]" value="D">D</label>
+          <label class="dia-option" data-dia="L"><input type="checkbox" name="dias[]" value="L">L</label>
+          <label class="dia-option" data-dia="M"><input type="checkbox" name="dias[]" value="M">M</label>
+          <label class="dia-option" data-dia="M"><input type="checkbox" name="dias[]" value="M">M</label>
+          <label class="dia-option" data-dia="J"><input type="checkbox" name="dias[]" value="J">J</label>
+          <label class="dia-option" data-dia="V"><input type="checkbox" name="dias[]" value="V">V</label>
+          <label class="dia-option" data-dia="S"><input type="checkbox" name="dias[]" value="S">S</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Horario de atención</label>
+        <div class="time-group">
+          <input type="time" name="hora_inicio" required>
+          <span class="ampm">AM</span>
+          <span>a</span>
+          <input type="time" name="hora_fin" required>
+          <span class="ampm">PM</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Capacidad</label>
+        <input type="number" name="capacidad" min="0" placeholder="Número de personas">
+      </div>
+
+      <div class="form-group">
+        <label>Número de empleados</label>
+        <input type="number" name="empleados" min="0" placeholder="Número de empleados">
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-tags"></i> 4. Clasificación del negocio</h2>
+
+      <div class="form-group">
+        <label>Categoría principal</label>
+        <select name="categoria" class="select-con-otro" required>
+          <option value="">Seleccione una categoría</option>
+          <option>Restaurante</option>
+          <option>Hospedaje</option>
+          <option>Tienda/Souvenir</option>
+          <option>Museo</option>
+          <option>Supermercado</option>
+          <option>Centro de salud</option>
+          <option>Transporte</option>
+          <option>Ciber</option>
+          <option>Coworking</option>
+          <option>Bar</option>
+          <option>Café</option>
+          <option value="otro">Otro</option>
+        </select>
+        <div class="otro-especifique hidden">
+          <label>Especifique otra categoría</label>
+          <textarea name="categoria_otro" rows="2" placeholder="Describa la categoría de su negocio"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Subcategoría o tipo específico</label>
+        <input type="text" name="subcategoria" placeholder="Ej: Comida marina, Hostal boutique, etc.">
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-id-card"></i> 5. Datos de contacto</h2>
+
+      <div class="form-group">
+        <label>Nombre del gerente o responsable</label>
+        <input type="text" name="gerente" required placeholder="Nombre completo">
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono (WhatsApp preferido)</label>
+        <input type="tel" name="telefono" required placeholder="Ej: +507 6123 4567">
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" name="correo" required placeholder="Ej: contacto@establecimiento.com">
+      </div>
+
+      <div class="form-group">
+        <label>Redes sociales o presencia digital</label>
+        <div class="checkbox-group">
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Booking/Airbnb/Tripadvisor"> Booking/Airbnb/Tripadvisor</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Pedidos Ya"> Pedidos Ya</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Instagram"> Instagram</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="WhatsApp"> WhatsApp</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="X"> X</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Página web"> Página web</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Otro"> Otro</label>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-comment-dots"></i> 6. Comentarios y sugerencias</h2>
+
+      <div class="form-group">
+        <label>¿Desea agregar alguna observación, idea o sugerencia?</label>
+        <textarea name="sugerencias" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">
+        <i class="fas fa-paper-plane"></i> Enviar formulario
+      </button>
+
+      <div class="form-footer">
+        <p>Gracias por participar en nuestro proyecto turístico comunitario</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const USUARIO = "App";
+  const CONTRASENA = "Panama";
+
+  function verificarAcceso(e) {
+    e.preventDefault();
+    const u = document.getElementById("usuario").value;
+    const p = document.getElementById("contrasena").value;
+
+    if (u === USUARIO && p === CONTRASENA) {
+      localStorage.setItem("accesoPermitido", "true");
+      document.getElementById("loginPopup").style.display = "none";
+      document.getElementById("headerSesion").classList.remove("hidden");
+      document.getElementById("formulario").classList.remove("hidden");
+    } else {
+      alert("Credenciales incorrectas. Por favor intente nuevamente.");
+    }
+  }
+
+  function cerrarSesion() {
+    localStorage.removeItem("accesoPermitido");
+    document.getElementById("formulario").classList.add("hidden");
+    document.getElementById("headerSesion").classList.add("hidden");
+    document.getElementById("loginPopup").style.display = "flex";
+    // Limpiar campos de login
+    document.getElementById("usuario").value = "";
+    document.getElementById("contrasena").value = "";
+  }
+
+  // Manejar selección de días
+  document.querySelectorAll('.dia-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const checkbox = this.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+      this.classList.toggle('selected', checkbox.checked);
     });
-  </script>
+  });
+
+  window.onload = () => {
+    if (localStorage.getItem("accesoPermitido") === "true") {
+      document.getElementById("loginPopup").style.display = "none";
+      document.getElementById("headerSesion").classList.remove("hidden");
+      document.getElementById("formulario").classList.remove("hidden");
+    } else {
+      document.getElementById("formulario").classList.add("hidden");
+      document.getElementById("headerSesion").classList.add("hidden");
+    }
+  }
+
+  // Mostrar campos "otro"
+  document.querySelectorAll(".select-con-otro").forEach(sel => sel.addEventListener("change", () => {
+    const contenedor = sel.nextElementSibling;
+    contenedor.classList.toggle("hidden", sel.value !== "otro");
+    if (sel.value !== "otro") contenedor.querySelector("textarea").value = "";
+  }));
+  
+  document.querySelectorAll(".check-otro").forEach(chk => chk.addEventListener("change", () => {
+    const contenedor = chk.closest(".checkbox-group").nextElementSibling;
+    contenedor.classList.toggle("hidden", !chk.checked);
+    if (!chk.checked) contenedor.querySelector("textarea").value = "";
+  }));
+
+  // Ubicación GPS automática
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(position => {
+      document.getElementById("coordenadas").value =
+        position.coords.latitude + "," + position.coords.longitude;
+    }, error => {
+      console.error("Error obteniendo ubicación:", error);
+    });
+  }
+
+  // Envío del formulario
+  document.getElementById("formulario").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    
+    // Mostrar loader o feedback visual
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
+    
+    try {
+      const form = new FormData(this);
+      form.set("funcionalidades", [...document.querySelectorAll('input[name="funcionalidades"]:checked')].map(i => i.value).join(', '));
+      form.set("redes", [...document.querySelectorAll('input[name="redes"]:checked')].map(i => i.value).join(', '));
+      form.set("dias", [...document.querySelectorAll('input[name="dias[]"]:checked')].map(i => i.value).join(', '));
+
+      const data = Object.fromEntries(form);
+      await fetch("https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      // Mostrar mensaje de éxito
+      alert("¡Gracias! Tu información ha sido enviada correctamente.");
+      this.reset();
+      
+      // Resetear días seleccionados
+      document.querySelectorAll('.dia-option').forEach(option => {
+        option.classList.remove('selected');
+        option.querySelector('input[type="checkbox"]').checked = false;
+      });
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      alert("Hubo un error al enviar el formulario. Por favor intente nuevamente.");
+    } finally {
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+
 </body>
 </html>
