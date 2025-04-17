@@ -237,26 +237,20 @@
       font-size: 0.9rem;
     }
 
-    .time-group {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .time-row {
+    .horario-group {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .time-row .ampm {
-      width: 50px;
-      padding: 12px 5px;
-      background: var(--gris-claro);
-      border-radius: 6px;
-      text-align: center;
+    .horario-input {
+      width: 100px !important;
+      padding: 10px !important;
+    }
+
+    .horario-separador {
       font-size: 0.9rem;
+      color: var(--gris-oscuro);
     }
 
     .section-divider {
@@ -354,17 +348,12 @@
         grid-template-columns: repeat(2, 1fr);
       }
       
-      .time-group {
-        grid-template-columns: 1fr;
-        gap: 5px;
+      .horario-group {
+        flex-wrap: wrap;
       }
       
-      .time-row {
-        width: 100%;
-      }
-      
-      .time-row input {
-        flex: 1;
+      .horario-input {
+        width: 100% !important;
       }
     }
 
@@ -510,6 +499,7 @@
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Promociones"> Promociones</label>
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Idiomas"> Idiomas</label>
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Agenda"> Agenda</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="todas" class="check-todas"> Todas las anteriores</label>
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Otro" class="check-otro"> Otro</label>
         </div>
         <div class="otro-especifique hidden">
@@ -552,15 +542,10 @@
 
       <div class="form-group">
         <label>Horario de atención</label>
-        <div class="time-group">
-          <div class="time-row">
-            <input type="time" name="hora_inicio" required>
-            <span class="ampm">AM</span>
-          </div>
-          <div class="time-row">
-            <input type="time" name="hora_fin" required>
-            <span class="ampm">PM</span>
-          </div>
+        <div class="horario-group">
+          <input type="time" name="hora_inicio" class="horario-input" required>
+          <span class="horario-separador">hasta las</span>
+          <input type="time" name="hora_fin" class="horario-input" required>
         </div>
       </div>
 
@@ -636,6 +621,7 @@
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="X"> X</label>
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="Página web"> Página web</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="todas" class="check-todas"> Todas las anteriores</label>
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="Otro"> Otro</label>
         </div>
       </div>
@@ -699,6 +685,32 @@
     });
   });
 
+  // Manejar selección de "Todas las anteriores"
+  document.querySelectorAll('.check-todas').forEach(todasCheckbox => {
+    todasCheckbox.addEventListener('change', function() {
+      const container = this.closest('.checkbox-group');
+      const checkboxes = container.querySelectorAll('input[type="checkbox"]:not(.check-todas):not(.check-otro)');
+      
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+        const label = checkbox.closest('label');
+        if (label) {
+          label.classList.toggle('selected', this.checked);
+        }
+      });
+      
+      // Desmarcar "Otro" si está marcado
+      const otroCheckbox = container.querySelector('.check-otro');
+      if (otroCheckbox && otroCheckbox.checked) {
+        otroCheckbox.checked = false;
+        const otroLabel = otroCheckbox.closest('label');
+        if (otroLabel) {
+          otroLabel.classList.remove('selected');
+        }
+      }
+    });
+  });
+
   // Actualizar y mostrar coordenadas
   function actualizarCoordenadas() {
     if (navigator.geolocation) {
@@ -758,8 +770,8 @@
     
     try {
       const form = new FormData(this);
-      form.set("funcionalidades", [...document.querySelectorAll('input[name="funcionalidades"]:checked')].map(i => i.value).join(', '));
-      form.set("redes", [...document.querySelectorAll('input[name="redes"]:checked')].map(i => i.value).join(', '));
+      form.set("funcionalidades", [...document.querySelectorAll('input[name="funcionalidades"]:checked:not(.check-todas)')].map(i => i.value).join(', '));
+      form.set("redes", [...document.querySelectorAll('input[name="redes"]:checked:not(.check-todas)')].map(i => i.value).join(', '));
       form.set("dias", [...document.querySelectorAll('input[name="dias[]"]:checked')].map(i => i.value).join(', '));
 
       const data = Object.fromEntries(form);
