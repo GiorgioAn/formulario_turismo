@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formulario de Participación Turística</title>
+  <title>Casco Antiguo - Participación Turística</title>
+  <link rel="icon" href="https://i.pinimg.com/originals/6c/fd/21/6cfd2101233405c53fd23742be575817.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     :root {
@@ -130,18 +131,20 @@
       margin: 15px 0;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+      gap: 10px;
     }
 
     .checkbox-inline, .radio-inline {
       display: flex;
       align-items: center;
       cursor: pointer;
+      font-size: 0.9rem;
     }
 
     .checkbox-inline input, .radio-inline input {
       width: auto;
       margin-right: 8px;
+      min-width: 18px;
     }
 
     .hidden {
@@ -235,21 +238,25 @@
     }
 
     .time-group {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 10px;
       align-items: center;
     }
 
-    .time-group input {
-      flex: 1;
+    .time-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .time-group .ampm {
-      width: 70px;
-      padding: 12px;
+    .time-row .ampm {
+      width: 50px;
+      padding: 12px 5px;
       background: var(--gris-claro);
       border-radius: 6px;
       text-align: center;
+      font-size: 0.9rem;
     }
 
     .section-divider {
@@ -262,7 +269,7 @@
     .dias-atencion {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
+      gap: 8px;
       margin: 15px 0;
     }
 
@@ -270,11 +277,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 8px 5px;
       background: var(--gris-claro);
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s;
+      font-size: 0.9rem;
     }
 
     .dia-option:hover {
@@ -291,6 +299,19 @@
       display: none;
     }
 
+    .coordenadas-info {
+      font-size: 0.85rem;
+      color: var(--gris-oscuro);
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .coordenadas-info i {
+      color: var(--dorado);
+    }
+
     @media (max-width: 900px) {
       .checkbox-group {
         grid-template-columns: repeat(3, 1fr);
@@ -300,8 +321,15 @@
         grid-template-columns: repeat(4, 1fr);
       }
       
-      .dia-option:nth-child(7) {
+      /* Asegurar que los días ocupen exactamente 2 filas */
+      .dia-option:nth-child(5) {
+        grid-column: 1 / span 1;
+      }
+      .dia-option:nth-child(6) {
         grid-column: 2 / span 1;
+      }
+      .dia-option:nth-child(7) {
+        grid-column: 3 / span 1;
       }
     }
 
@@ -327,29 +355,39 @@
       }
       
       .time-group {
-        flex-wrap: wrap;
+        grid-template-columns: 1fr;
+        gap: 5px;
       }
       
-      .time-group input {
-        min-width: 100%;
+      .time-row {
+        width: 100%;
       }
       
-      .time-group .ampm {
-        width: 45%;
+      .time-row input {
+        flex: 1;
       }
     }
 
     @media (max-width: 480px) {
-      .checkbox-group {
-        grid-template-columns: 1fr;
-      }
-      
       .dias-atencion {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
       
+      /* Asegurar 2 filas exactas en móviles */
+      .dia-option:nth-child(5) {
+        grid-column: 1 / span 1;
+      }
+      .dia-option:nth-child(6) {
+        grid-column: 2 / span 1;
+      }
       .dia-option:nth-child(7) {
-        grid-column: auto;
+        grid-column: 3 / span 1;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
       }
     }
 
@@ -394,7 +432,7 @@
 
 <div class="header hidden" id="headerSesion">
   <div class="header-content">
-    <span>Formulario de Participación Turística</span>
+    <span>Casco Antiguo</span>
     <button class="btn btn-danger" onclick="cerrarSesion()">
       <i class="fas fa-sign-out-alt"></i> Cerrar sesión
     </button>
@@ -404,7 +442,7 @@
 <div class="container">
   <div class="card">
     <h1>
-      <i class="fas fa-map-marked-alt"></i> Formulario de Participación Turística Comunitaria
+      <i class="fas fa-map-marked-alt"></i> Casco Antiguo - Participación Turística Comunitaria
     </h1>
 
     <form id="formulario">
@@ -493,6 +531,10 @@
         <label>Dirección física o aproximada</label>
         <input type="text" name="direccion" required placeholder="Ej: Calle Principal #123, Ciudad">
         <input type="hidden" name="coordenadas" id="coordenadas">
+        <div class="coordenadas-info">
+          <i class="fas fa-map-marker-alt"></i>
+          <span id="coordenadas-texto">Obteniendo coordenadas GPS...</span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -511,11 +553,14 @@
       <div class="form-group">
         <label>Horario de atención</label>
         <div class="time-group">
-          <input type="time" name="hora_inicio" required>
-          <span class="ampm">AM</span>
-          <span>a</span>
-          <input type="time" name="hora_fin" required>
-          <span class="ampm">PM</span>
+          <div class="time-row">
+            <input type="time" name="hora_inicio" required>
+            <span class="ampm">AM</span>
+          </div>
+          <div class="time-row">
+            <input type="time" name="hora_fin" required>
+            <span class="ampm">PM</span>
+          </div>
         </div>
       </div>
 
@@ -629,6 +674,7 @@
       document.getElementById("loginPopup").style.display = "none";
       document.getElementById("headerSesion").classList.remove("hidden");
       document.getElementById("formulario").classList.remove("hidden");
+      actualizarCoordenadas();
     } else {
       alert("Credenciales incorrectas. Por favor intente nuevamente.");
     }
@@ -653,11 +699,34 @@
     });
   });
 
+  // Actualizar y mostrar coordenadas
+  function actualizarCoordenadas() {
+    if (navigator.geolocation) {
+      const success = position => {
+        const lat = position.coords.latitude.toFixed(6);
+        const lng = position.coords.longitude.toFixed(6);
+        document.getElementById("coordenadas").value = `${lat},${lng}`;
+        document.getElementById("coordenadas-texto").textContent = `Coordenadas GPS: ${lat}, ${lng}`;
+      };
+      
+      const error = err => {
+        console.error("Error obteniendo ubicación:", err);
+        document.getElementById("coordenadas-texto").textContent = "No se pudo obtener la ubicación GPS";
+      };
+      
+      navigator.geolocation.getCurrentPosition(success, error);
+      navigator.geolocation.watchPosition(success, error);
+    } else {
+      document.getElementById("coordenadas-texto").textContent = "Geolocalización no soportada por este navegador";
+    }
+  }
+
   window.onload = () => {
     if (localStorage.getItem("accesoPermitido") === "true") {
       document.getElementById("loginPopup").style.display = "none";
       document.getElementById("headerSesion").classList.remove("hidden");
       document.getElementById("formulario").classList.remove("hidden");
+      actualizarCoordenadas();
     } else {
       document.getElementById("formulario").classList.add("hidden");
       document.getElementById("headerSesion").classList.add("hidden");
@@ -676,16 +745,6 @@
     contenedor.classList.toggle("hidden", !chk.checked);
     if (!chk.checked) contenedor.querySelector("textarea").value = "";
   }));
-
-  // Ubicación GPS automática
-  if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(position => {
-      document.getElementById("coordenadas").value =
-        position.coords.latitude + "," + position.coords.longitude;
-    }, error => {
-      console.error("Error obteniendo ubicación:", error);
-    });
-  }
 
   // Envío del formulario
   document.getElementById("formulario").addEventListener("submit", async function (e) {
@@ -720,6 +779,9 @@
         option.classList.remove('selected');
         option.querySelector('input[type="checkbox"]').checked = false;
       });
+      
+      // Actualizar coordenadas nuevamente
+      actualizarCoordenadas();
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
       alert("Hubo un error al enviar el formulario. Por favor intente nuevamente.");
