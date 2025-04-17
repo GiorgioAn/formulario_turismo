@@ -4,55 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulario Turístico</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css">
   <style>
     body {
       font-family: sans-serif;
       padding: 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
+      background: #fafafa;
     }
+
+    h1, h2 {
+      color: #333;
+    }
+
     p.intro {
       font-size: 1rem;
       margin-bottom: 20px;
     }
-    .grid-options {
+
+    .grid-options, .social-options {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      justify-content: space-between;
     }
-    .grid-options label {
+
+    .grid-options label, .social-options label {
       flex: 1 1 30%;
       background: #f0f0f0;
       padding: 10px;
       border-radius: 8px;
       text-align: center;
     }
+
     .day-selector {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       margin-bottom: 10px;
     }
+
     .day-selector label {
-      flex: 1;
+      flex: 1 1 13%;
       text-align: center;
     }
-    .social-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .social-options label {
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 8px;
-    }
-    input[type="number"] {
+
+    input[type="number"],
+    input[type="time"],
+    select {
       width: 100%;
-      padding: 5px;
+      padding: 6px;
+      margin-bottom: 10px;
     }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #333;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
-      .grid-options label, .social-options label {
+      .grid-options label,
+      .social-options label {
         flex: 1 1 100%;
       }
     }
@@ -64,49 +80,55 @@
   <p class="intro"><strong>¡Hola!</strong> Gracias por tomarte unos minutos para ayudarnos a construir una herramienta turística digital que centralice la información del destino y potencie tu negocio o servicio.</p>
 
   <form id="formulario">
-    
-    <!-- Pregunta 2: Tipo de lugar -->
+
+    <!-- Pregunta 2 -->
     <h2>¿Qué tipo de lugar es?</h2>
     <div class="grid-options">
       <label><input type="checkbox" name="tipo" value="Ciber"> Ciber</label>
       <label><input type="checkbox" name="tipo" value="Coworking"> Coworking</label>
       <label><input type="checkbox" name="tipo" value="Bar"> Bar</label>
       <label><input type="checkbox" name="tipo" value="Café"> Café</label>
-      <!-- Más tipos si querés... -->
     </div>
 
-    <!-- Horarios y días -->
+    <!-- Días y horarios -->
     <h2>Días y horarios de atención</h2>
     <div class="day-selector">
       <label><input type="checkbox" name="dias" value="D"> D</label>
       <label><input type="checkbox" name="dias" value="L"> L</label>
       <label><input type="checkbox" name="dias" value="M"> M</label>
-      <label><input type="checkbox" name="dias" value="M"> M</label>
+      <label><input type="checkbox" name="dias" value="X"> X</label>
       <label><input type="checkbox" name="dias" value="J"> J</label>
       <label><input type="checkbox" name="dias" value="V"> V</label>
       <label><input type="checkbox" name="dias" value="S"> S</label>
     </div>
-    <label>Horario:
-      <input type="time" name="hora" />
+
+    <label>Horario A.M.
+      <input type="time" name="hora_am">
     </label>
-    <label>
-      <select name="ampm">
-        <option value="AM">A.M.</option>
-        <option value="PM">P.M.</option>
-      </select>
+    <label>Horario P.M.
+      <input type="time" name="hora_pm">
     </label>
 
     <!-- Capacidad y empleados -->
-    <h2>Capacidad</h2>
+    <h2>Capacidad del lugar</h2>
     <input type="number" name="capacidad" placeholder="Número de personas" />
 
     <h2>Empleados</h2>
     <input type="number" name="empleados" placeholder="Número de empleados" />
 
+    <!-- Clasificación -->
+    <h2>Clasificación</h2>
+    <div class="grid-options">
+      <label><input type="checkbox" name="clasificacion" value="Ciber"> Ciber</label>
+      <label><input type="checkbox" name="clasificacion" value="Coworking"> Coworking</label>
+      <label><input type="checkbox" name="clasificacion" value="Bar"> Bar</label>
+      <label><input type="checkbox" name="clasificacion" value="Café"> Café</label>
+    </div>
+
     <!-- Redes sociales -->
-    <h2>¿Dónde estás presente?</h2>
+    <h2>Redes sociales / plataformas</h2>
     <div class="social-options">
-      <label><input type="checkbox" name="redes" value="Plataformas de reserva"> Booking / Airbnb / Tripadvisor</label>
+      <label><input type="checkbox" name="redes" value="Reservas"> Booking / Airbnb / Tripadvisor</label>
       <label><input type="checkbox" name="redes" value="PedidosYa"> Pedidos Ya</label>
       <label><input type="checkbox" name="redes" value="Web"> Página Web</label>
       <label><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
@@ -117,15 +139,18 @@
       <label><input type="checkbox" name="redes" value="Otros"> Otros</label>
     </div>
 
-    <!-- Dirección automática -->
+    <!-- Coordenadas -->
     <h2>Dirección física</h2>
     <p>Coordenadas GPS: <span id="gps-coords">Obteniendo ubicación...</span></p>
-    <input type="hidden" name="latitud" id="lat" />
-    <input type="hidden" name="longitud" id="lon" />
+    <input type="hidden" name="latitud" id="lat">
+    <input type="hidden" name="longitud" id="lon">
 
     <button type="submit">Enviar</button>
   </form>
 
+  <!-- Librerías -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+  
   <!-- Geolocalización -->
   <script>
     if ("geolocation" in navigator) {
@@ -143,7 +168,23 @@
     }
   </script>
 
+  <!-- Script envío a Google Sheets -->
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec";
+    const form = document.getElementById("formulario");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+          Swal.fire("¡Gracias!", "Tus datos fueron enviados correctamente.", "success");
+          form.reset();
+        })
+        .catch(error => {
+          Swal.fire("Error", "Ocurrió un error al enviar tus datos.", "error");
+        });
+    });
+  </script>
+
 </body>
 </html>
-
-
