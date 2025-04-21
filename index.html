@@ -112,3 +112,158 @@
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Opiniones"> Opiniones</label>
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Horarios"> Horarios</label>
           <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Servicios"> Servicios</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Reservas"> Reservas</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Promociones"> Promociones</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Idiomas"> Idiomas</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Agenda"> Agenda</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="todas" class="check-todas"> Todas las anteriores</label>
+          <label class="checkbox-inline"><input type="checkbox" name="funcionalidades" value="Otro" class="check-otro"> Otro</label>
+        </div>
+        <div class="otro-especifique hidden">
+          <label>Especifique otra funcionalidad</label>
+          <textarea name="func_otro" rows="2" placeholder="Describa la funcionalidad que desearía"></textarea>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-store"></i> 3. Información del establecimiento</h2>
+
+      <div class="form-group">
+        <label>Nombre del establecimiento</label>
+        <input type="text" name="nombre_establecimiento" required placeholder="Ej: Restaurante La Casa del Mar">
+      </div>
+
+      <div class="form-group">
+        <label>Dirección física o aproximada</label>
+        <input type="text" name="direccion" required placeholder="Ej: Calle Principal #123, Ciudad">
+        <input type="hidden" name="coordenadas" id="coordenadas">
+        <div class="coordenadas-info">
+          <i class="fas fa-map-marker-alt"></i>
+          <span id="coordenadas-texto">Obteniendo coordenadas GPS...</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Días de atención</label>
+        <div class="dias-atencion">
+          <label class="dia-option" data-dia="D"><input type="checkbox" name="dias[]" value="D">D</label>
+          <label class="dia-option" data-dia="L"><input type="checkbox" name="dias[]" value="L">L</label>
+          <label class="dia-option" data-dia="Ma"><input type="checkbox" name="dias[]" value="Ma">Ma</label>
+          <label class="dia-option" data-dia="Mi"><input type="checkbox" name="dias[]" value="Mi">Mi</label>
+          <label class="dia-option" data-dia="J"><input type="checkbox" name="dias[]" value="J">J</label>
+          <label class="dia-option" data-dia="V"><input type="checkbox" name="dias[]" value="V">V</label>
+          <label class="dia-option" data-dia="S"><input type="checkbox" name="dias[]" value="S">S</label>
+          <label class="dia-option" id="todos-dias"><input type="checkbox">Todos</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Horario de atención</label>
+        <div class="horario-group">
+          <input type="time" name="hora_inicio" class="horario-input" required>
+          <span class="horario-separador">hasta las</span>
+          <input type="time" name="hora_fin" class="horario-input" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Capacidad</label>
+        <input type="number" name="capacidad" min="0" placeholder="Número de personas">
+      </div>
+
+      <div class="form-group">
+        <label>Número de empleados</label>
+        <input type="number" name="empleados" min="0" placeholder="Número de empleados">
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-tags"></i> 4. Clasificación del negocio</h2>
+
+      <div class="form-group">
+        <label>Categoría principal</label>
+        <select name="categoria" class="select-con-otro" required>
+          <option value="">Seleccione una categoría</option>
+          <option>Restaurante</option>
+          <option>Hospedaje</option>
+          <option>Tienda/Souvenir</option>
+          <option>Museo</option>
+          <option>Supermercado</option>
+          <option>Centro de salud</option>
+          <option>Transporte</option>
+          <option>Ciber</option>
+          <option>Coworking</option>
+          <option>Bar</option>
+          <option>Café</option>
+          <option value="otro">Otro</option>
+        </select>
+        <div class="otro-especifique hidden">
+          <label>Especifique otra categoría</label>
+          <textarea name="categoria_otro" rows="2" placeholder="Describa la categoría de su negocio"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Subcategoría o tipo específico</label>
+        <input type="text" name="subcategoria" placeholder="Ej: Comida marina, Hostal boutique, etc.">
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-id-card"></i> 5. Datos de contacto</h2>
+
+      <div class="form-group">
+        <label>Nombre del gerente o responsable</label>
+        <input type="text" name="gerente" required placeholder="Nombre completo">
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono (WhatsApp preferido)</label>
+        <input type="tel" name="telefono" required placeholder="Ej: +507 6123 4567">
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" name="correo" required placeholder="Ej: contacto@establecimiento.com">
+      </div>
+
+      <div class="form-group">
+        <label>Redes sociales o presencia digital</label>
+        <div class="checkbox-group">
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Booking/Airbnb/Tripadvisor"> Booking/Airbnb/Tripadvisor</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Pedidos Ya"> Pedidos Ya</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Facebook"> Facebook</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Instagram"> Instagram</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="WhatsApp"> WhatsApp</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="X"> X</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Página web"> Página web</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="todas" class="check-todas"> Todas las anteriores</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Otro" class="check-otro"> Otro</label>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <h2><i class="fas fa-comment-dots"></i> 6. Comentarios y sugerencias</h2>
+
+      <div class="form-group">
+        <label>¿Desea agregar alguna observación, idea o sugerencia?</label>
+        <textarea name="sugerencias" rows="4" placeholder="Escriba aquí sus comentarios..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">
+        <i class="fas fa-paper-plane"></i> Enviar formulario
+      </button>
+
+      <div class="form-footer">
+        <p>Gracias por participar en nuestro proyecto turístico comunitario</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
