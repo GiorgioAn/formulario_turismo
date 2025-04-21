@@ -75,10 +75,329 @@ h1::after {
 }
 
 .intro-text {
-  text-align: justify;
-  margin: 0 auto 30px;
+  text-align: center;
+  margin-bottom: 30px;
   color: var(--gris-oscuro);
   font-size: 1.1rem;
   line-height: 1.7;
-  max-width: 800px;
+}
+
+h2 {
+  color: var(--azul-marino);
+  font-size: 1.5rem;
+  margin: 25px 0 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--gris-medio);
+}
+
+h2 i {
+  margin-right: 10px;
+  color: var(--dorado);
+}
+
+label {
+  display: block;
+  margin: 15px 0 8px;
+  font-weight: 600;
+  color: var(--azul-marino);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--gris-medio);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--dorado);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.checkbox-group, .radio-group {
+  margin: 15px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.checkbox-inline, .radio-inline {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.checkbox-inline input, .radio-inline input {
+  width: auto;
+  margin-right: 8px;
+  min-width: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--azul-marino);
+  color: var(--blanco);
+  border: none;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: var(--sombra);
+}
+
+.btn:hover {
+  background-color: #001a4d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background-color: var(--azul-marino);
+}
+
+.btn-danger {
+  background-color: var(--rojo);
+}
+
+.btn-gold {
+  background-color: var(--dorado);
+  color: var(--azul-marino);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+#loginPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 35, 102, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#loginPopup form {
+  background: var(--blanco);
+  padding: 2.5rem;
+  border-radius: 10px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#loginPopup h3 {
+  color: var(--azul-marino);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-header img {
+  max-width: 120px;
+  margin-bottom: 15px;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--gris-oscuro);
+  font-size: 0.9rem;
+}
+
+.horario-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.horario-input {
+  width: 100px !important;
+  padding: 10px !important;
+}
+
+.horario-separador {
+  font-size: 0.9rem;
+  color: var(--gris-oscuro);
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--dorado), transparent);
+  margin: 30px 0;
+}
+
+/* Estilos para los días de atención */
+.dias-atencion {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.dia-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 5px;
+  background: var(--gris-claro);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.dia-option:hover {
+  background: var(--dorado);
+  color: var(--blanco);
+}
+
+.dia-option.selected {
+  background: var(--azul-marino);
+  color: var(--blanco);
+}
+
+.dia-option input {
+  display: none;
+}
+
+.coordenadas-info {
+  font-size: 0.85rem;
+  color: var(--gris-oscuro);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.coordenadas-info i {
+  color: var(--dorado);
+}
+
+@media (max-width: 900px) {
+  .checkbox-group {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .dias-atencion {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Asegurar que los días ocupen exactamente 2 filas */
+  .dia-option:nth-child(5) {
+    grid-column: 1 / span 1;
+  }
+  .dia-option:nth-child(6) {
+    grid-column: 2 / span 1;
+  }
+  .dia-option:nth-child(7) {
+    grid-column: 3 / span 1;
+  }
+  .dia-option:nth-child(8) {
+    grid-column: 4 / span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  .checkbox-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .horario-group {
+    flex-wrap: wrap;
+  }
+  
+  .horario-input {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dias-atencion {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Asegurar 2 filas exactas en móviles */
+  .dia-option:nth-child(5) {
+    grid-column: 1 / span 1;
+  }
+  .dia-option:nth-child(6) {
+    grid-column: 2 / span 1;
+  }
+  .dia-option:nth-child(7) {
+    grid-column: 3 / span 1;
+  }
+  .dia-option:nth-child(8) {
+    grid-column: 4 / span 1;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Mejoras visuales para checkboxes y radios */
+input[type="checkbox"], input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--dorado);
 }
