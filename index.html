@@ -66,7 +66,7 @@
       color: var(--azul-marino);
       text-align: center;
       font-size: 2.2rem;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       padding-bottom: 15px;
       border-bottom: 2px solid var(--dorado);
       position: relative;
@@ -81,6 +81,14 @@
       width: 100px;
       height: 4px;
       background-color: var(--rojo);
+    }
+
+    .intro-text {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--gris-oscuro);
+      font-size: 1.1rem;
+      line-height: 1.7;
     }
 
     h2 {
@@ -262,7 +270,7 @@
     /* Estilos para los días de atención */
     .dias-atencion {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(8, 1fr);
       gap: 8px;
       margin: 15px 0;
     }
@@ -325,6 +333,9 @@
       .dia-option:nth-child(7) {
         grid-column: 3 / span 1;
       }
+      .dia-option:nth-child(8) {
+        grid-column: 4 / span 1;
+      }
     }
 
     @media (max-width: 768px) {
@@ -371,6 +382,9 @@
       }
       .dia-option:nth-child(7) {
         grid-column: 3 / span 1;
+      }
+      .dia-option:nth-child(8) {
+        grid-column: 4 / span 1;
       }
       
       .header-content {
@@ -433,6 +447,13 @@
     <h1>
       <i class="fas fa-map-marked-alt"></i> Casco Antiguo - Participación Turística Comunitaria
     </h1>
+    
+    <p class="intro-text">
+      Esta encuesta tiene como objetivo recopilar información para el desarrollo de una solución digital 
+      que integre los servicios turísticos del destino. Sus respuestas nos ayudarán a crear una plataforma 
+      que beneficie a toda la comunidad. Todos los datos proporcionados serán utilizados únicamente con 
+      fines de investigación y desarrollo del proyecto.
+    </p>
 
     <form id="formulario">
       <h2><i class="fas fa-star"></i> 1. Interés y percepción</h2>
@@ -532,11 +553,12 @@
         <div class="dias-atencion">
           <label class="dia-option" data-dia="D"><input type="checkbox" name="dias[]" value="D">D</label>
           <label class="dia-option" data-dia="L"><input type="checkbox" name="dias[]" value="L">L</label>
-          <label class="dia-option" data-dia="M"><input type="checkbox" name="dias[]" value="M">M</label>
-          <label class="dia-option" data-dia="M"><input type="checkbox" name="dias[]" value="M">M</label>
+          <label class="dia-option" data-dia="Ma"><input type="checkbox" name="dias[]" value="Ma">Ma</label>
+          <label class="dia-option" data-dia="Mi"><input type="checkbox" name="dias[]" value="Mi">Mi</label>
           <label class="dia-option" data-dia="J"><input type="checkbox" name="dias[]" value="J">J</label>
           <label class="dia-option" data-dia="V"><input type="checkbox" name="dias[]" value="V">V</label>
           <label class="dia-option" data-dia="S"><input type="checkbox" name="dias[]" value="S">S</label>
+          <label class="dia-option" id="todos-dias"><input type="checkbox">Todos</label>
         </div>
       </div>
 
@@ -622,7 +644,7 @@
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="TikTok"> TikTok</label>
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="Página web"> Página web</label>
           <label class="checkbox-inline"><input type="checkbox" name="redes" value="todas" class="check-todas"> Todas las anteriores</label>
-          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Otro"> Otro</label>
+          <label class="checkbox-inline"><input type="checkbox" name="redes" value="Otro" class="check-otro"> Otro</label>
         </div>
       </div>
 
@@ -682,10 +704,32 @@
       const checkbox = this.querySelector('input[type="checkbox"]');
       checkbox.checked = !checkbox.checked;
       this.classList.toggle('selected', checkbox.checked);
+      
+      // Desmarcar "Todos" si se desmarca algún día
+      if (!checkbox.checked && this.id !== "todos-dias") {
+        document.getElementById("todos-dias").classList.remove("selected");
+        document.getElementById("todos-dias").querySelector('input[type="checkbox"]').checked = false;
+      }
     });
   });
 
-  // Manejar selección de "Todas las anteriores"
+  // Manejar botón "Todos" para días
+  document.getElementById("todos-dias").addEventListener("click", function() {
+    const todosCheckbox = this.querySelector('input[type="checkbox"]');
+    const isChecked = !todosCheckbox.checked;
+    
+    todosCheckbox.checked = isChecked;
+    this.classList.toggle("selected", isChecked);
+    
+    // Seleccionar/deseleccionar todos los días
+    document.querySelectorAll('.dia-option:not(#todos-dias)').forEach(option => {
+      const checkbox = option.querySelector('input[type="checkbox"]');
+      checkbox.checked = isChecked;
+      option.classList.toggle("selected", isChecked);
+    });
+  });
+
+  // Manejar selección de "Todas las anteriores" en redes sociales
   document.querySelectorAll('.check-todas').forEach(todasCheckbox => {
     todasCheckbox.addEventListener('change', function() {
       const container = this.closest('.checkbox-group');
