@@ -75,7 +75,7 @@ h1::after {
 }
 
 .intro-text {
-  text-align: center;
+  text-align: justify;
   margin-bottom: 30px;
   color: var(--gris-oscuro);
   font-size: 1.1rem;
