@@ -775,7 +775,7 @@
       form.set("dias", [...document.querySelectorAll('input[name="dias[]"]:checked')].map(i => i.value).join(', '));
 
       const data = Object.fromEntries(form);
-      await fetch("https://script.google.com/macros/s/AKfycbwAEOkH-iso4D9jHr41Uj7JeyUK8h037JwXiLc9qtj7_5dDPD3QlE8-B9t3fx4Qo88Q/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbxhbpP6ChYkX0ZywFfRbyAz3AGHVW2vNYbP5I7QrVng0bgO-PTGWMLlDt8JGg4DKjKX/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
